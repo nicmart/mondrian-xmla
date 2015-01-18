@@ -1,0 +1,29 @@
+<Schema name="Test" metamodelVersion="4.0">
+    <PhysicalSchema>
+        <Table name="ep_activity"/>
+        <Table name="ep_users"/>
+    </PhysicalSchema>
+    <Cube name="Activity">
+        <Dimensions>
+            <Dimension name="User" table="ep_users" key="ID">
+                <Attributes>
+                    <Attribute name="ID" column="ID">
+                        <Key>
+                            <Column name="ID"/>
+                        </Key>
+                    </Attribute>
+                </Attributes>
+            </Dimension>
+        </Dimensions>
+        <MeasureGroups>
+            <MeasureGroup name="TEST" table="ep_activity">
+                <Measures>
+                    <Measure name="Total" column="subject_id" aggregator="count"/>
+                </Measures>
+                <DimensionLinks>
+                    <ForeignKeyLink dimension="User" foreignKeyColumn="subject_id"/>
+                </DimensionLinks>
+            </MeasureGroup>
+        </MeasureGroups>
+    </Cube>
+</Schema>
